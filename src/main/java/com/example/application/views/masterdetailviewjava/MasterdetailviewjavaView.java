@@ -39,7 +39,6 @@ public class MasterdetailviewjavaView extends Div {
 
     private Grid<Book> grid = new Grid<>(Book.class, false);
 
-    private Upload image;
     private TextField name;
     private TextField author;
     private DatePicker publicationDate;
@@ -136,14 +135,13 @@ public class MasterdetailviewjavaView extends Div {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        image = new Upload("Image");
         name = new TextField("Name");
         author = new TextField("Author");
         publicationDate = new DatePicker("Publication Date");
         pages = new TextField("Pages");
         isbn = new TextField("Isbn");
         price = new TextField("Price");
-        Component[] fields = new Component[] { imageUpload, name, author, publicationDate, pages, isbn, price };
+        Component[] fields = new Component[] { name, author, publicationDate, pages, isbn, price };
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
