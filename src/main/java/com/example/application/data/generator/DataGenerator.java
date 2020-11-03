@@ -5,7 +5,6 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.example.application.data.service.BookRepository;
 import com.example.application.data.entity.Book;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -39,8 +38,6 @@ public class DataGenerator {
             bookRepositoryGenerator.setData(Book::setIsbn, DataType.EAN13);
             bookRepositoryGenerator.setData(Book::setPrice, DataType.PRICE);
             bookRepository.saveAll(bookRepositoryGenerator.create(100, seed));
-
-
 
             logger.info("Generated demo data");
         };
