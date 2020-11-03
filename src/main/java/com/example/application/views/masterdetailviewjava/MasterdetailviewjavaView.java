@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.example.application.data.entity.Book;
 import com.example.application.data.service.BookService;
-import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -143,10 +143,9 @@ public class MasterdetailviewjavaView extends Div {
         pages = new TextField("Pages");
         isbn = new TextField("Isbn");
         price = new TextField("Price");
-        AbstractField<?, ?>[] fields = new AbstractField<?, ?>[] { image, name, author, publicationDate, pages, isbn,
-                price };
+        Component[] fields = new Component[] { imageUpload, name, author, publicationDate, pages, isbn, price };
 
-        for (AbstractField<?, ?> field : fields) {
+        for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
         }
         formLayout.add(fields);
