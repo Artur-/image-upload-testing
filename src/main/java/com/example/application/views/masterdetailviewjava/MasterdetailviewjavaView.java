@@ -1,5 +1,8 @@
 package com.example.application.views.masterdetailviewjava;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Optional;
 
 import com.example.application.data.entity.Book;
@@ -15,10 +18,12 @@ import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.converter.StringToDoubleConverter;
@@ -26,10 +31,13 @@ import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.util.UriUtils;
 import org.vaadin.artur.helpers.CrudServiceDataProvider;
-import com.vaadin.flow.router.RouteAlias;
+
+import elemental.json.Json;
 
 @Route(value = "master-detail-view-java")
 @PageTitle("master-detail-view-java")
@@ -39,6 +47,8 @@ public class MasterdetailviewjavaView extends Div {
 
     private Grid<Book> grid = new Grid<>(Book.class, false);
 
+    private Image imageImage;
+    private Upload imageUpload;
     private TextField name;
     private TextField author;
     private DatePicker publicationDate;
@@ -115,6 +125,7 @@ public class MasterdetailviewjavaView extends Div {
                     this.book = new Book();
                 }
                 binder.writeBean(this.book);
+                this.book.setImage(imageImage.getSrc());
                 bookService.update(this.book);
                 clearForm();
                 refreshGrid();
@@ -135,13 +146,34 @@ public class MasterdetailviewjavaView extends Div {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
+
+        imageImage = new Image();
+        imageImage.addClassName("full-width");
+
+        ByteArrayOutputStream uploadItem = new ByteArrayOutputStream();
+        imageUpload = new Upload();
+        imageUpload.setAcceptedFileTypes("image/*");
+        imageUpload.getElement().appendChild(imageImage.getElement());
+        imageUpload.setReceiver((fileName, mimeType) -> {
+            return uploadItem;
+        });
+        imageUpload.addSucceededListener(e -> {
+            String mimeType = e.getMIMEType();
+            String base64ImageData = Base64.getEncoder().encodeToString(uploadItem.toByteArray());
+            String dataUrl = "data:" + mimeType + ";base64,"
+                    + UriUtils.encodeQuery(base64ImageData, StandardCharsets.UTF_8);
+            imageUpload.getElement().setPropertyJson("files", Json.createArray());
+            imageImage.setSrc(dataUrl);
+            uploadItem.reset();
+        });
+
         name = new TextField("Name");
         author = new TextField("Author");
         publicationDate = new DatePicker("Publication Date");
         pages = new TextField("Pages");
         isbn = new TextField("Isbn");
         price = new TextField("Price");
-        Component[] fields = new Component[] { name, author, publicationDate, pages, isbn, price };
+        Component[] fields = new Component[] { imageUpload, name, author, publicationDate, pages, isbn, price };
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
@@ -184,5 +216,10 @@ public class MasterdetailviewjavaView extends Div {
     private void populateForm(Book value) {
         this.book = value;
         binder.readBean(this.book);
+        if (value == null) {
+            this.imageImage.setSrc("");
+        } else {
+            this.imageImage.setSrc(value.getImage());
+        }
     }
 }
