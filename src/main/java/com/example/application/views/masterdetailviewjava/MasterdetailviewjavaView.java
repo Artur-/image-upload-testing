@@ -102,6 +102,7 @@ public class MasterdetailviewjavaView extends Div {
 
         // Bind fields. This where you'd define e.g. validation rules
         binder.forField(pages).withConverter(new StringToIntegerConverter("Only numbers are allowed")).bind("pages");
+        binder.forField(price).withConverter(new StringToDoubleConverter("Only numbers are allowed")).bind("price");
         binder.bindInstanceFields(this);
 
         cancel.addClickListener(e -> {
