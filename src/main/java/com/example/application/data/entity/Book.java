@@ -1,9 +1,11 @@
 package com.example.application.data.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 
 import com.example.application.data.AbstractEntity;
-import java.time.LocalDate;
 
 @Entity
 public class Book extends AbstractEntity {
@@ -16,6 +18,7 @@ public class Book extends AbstractEntity {
   private String isbn;
   private Double price;
 
+  @Lob
   public String getImage() {
     return image;
   }
