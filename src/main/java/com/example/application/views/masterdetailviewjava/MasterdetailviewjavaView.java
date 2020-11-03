@@ -18,10 +18,11 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
-import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.converter.StringToDoubleConverter;
+import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -42,7 +43,7 @@ public class MasterdetailviewjavaView extends Div {
     private TextField name;
     private TextField author;
     private DatePicker publicationDate;
-    private NumberField pages;
+    private TextField pages;
     private TextField isbn;
     private TextField price;
 
@@ -100,6 +101,7 @@ public class MasterdetailviewjavaView extends Div {
         binder = new Binder<>(Book.class);
 
         // Bind fields. This where you'd define e.g. validation rules
+        binder.forField(pages).withConverter(new StringToIntegerConverter("Only numbers are allowed")).bind("pages");
         binder.bindInstanceFields(this);
 
         cancel.addClickListener(e -> {
@@ -137,7 +139,7 @@ public class MasterdetailviewjavaView extends Div {
         name = new TextField("Name");
         author = new TextField("Author");
         publicationDate = new DatePicker("Publication Date");
-        pages = new NumberField("Pages");
+        pages = new TextField("Pages");
         isbn = new TextField("Isbn");
         price = new TextField("Price");
         AbstractField<?, ?>[] fields = new AbstractField<?, ?>[] { image, name, author, publicationDate, pages, isbn,

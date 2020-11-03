@@ -12,7 +12,7 @@ public class Book extends AbstractEntity {
   private String name;
   private String author;
   private LocalDate publicationDate;
-  private Double pages;
+  private Integer pages;
   private String isbn;
   private Double price;
 
@@ -48,11 +48,11 @@ public class Book extends AbstractEntity {
     this.publicationDate = publicationDate;
   }
 
-  public Double getPages() {
+  public Integer getPages() {
     return pages;
   }
 
-  public void setPages(Double pages) {
+  public void setPages(Integer pages) {
     this.pages = pages;
   }
 
