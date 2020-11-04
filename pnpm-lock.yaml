@@ -44,7 +44,10 @@ dependencies:
   '@vaadin/vaadin-text-field': 2.7.1
   '@vaadin/vaadin-time-picker': 2.3.0
   '@vaadin/vaadin-upload': 4.4.0
+  cdigit: 2.5.6
+  chance: 1.1.7
   lit-element: 2.3.1
+  open: 7.3.0
 devDependencies:
   '@types/validator': 10.11.3
   awesome-typescript-loader: 5.2.1_typescript@3.8.3
@@ -2339,6 +2342,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-g1iSHKVxornw0K8LG9LLdf+Fxnv7T1Z+mMsf0/YYLclQX4Cd522Ap0Lrw6NFqHgezit78dtyWxzlV2Xfc7vgRg==
+  /cdigit/2.5.6:
+    dependencies:
+      commander: 6.2.0
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-vWobMCPvyrlifhkVAgLhmRApM33OsvoWDhrNaAiwzZcWpzQfT0H3a+rxSZlCv3IyyjxwJHEQbExoJAQUSKvyRA==
   /chalk/2.4.2:
     dependencies:
       ansi-styles: 3.2.1
@@ -2349,6 +2359,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
+  /chance/1.1.7:
+    dev: false
+    resolution:
+      integrity: sha512-bua/2cZEfzS6qPm0vi3JEvGNbriDLcMj9lKxCQOjUcCJRcyjA7umP0zZm6bKWWlBN04vA0L99QGH/CZQawr0eg==
   /chokidar/3.4.0:
     dependencies:
       anymatch: 3.1.1
@@ -2468,6 +2482,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
+  /commander/6.2.0:
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-zP4jEKbe8SHzKJYQmq8Y9gYjtO/POJLgIdKgV7B9qNmABVFVc+ctqSX6iXh4mCpJfRBOabiZ2YKPg8ciDw6C+Q==
   /commondir/1.0.1:
     dev: true
     resolution:
@@ -4003,6 +4023,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-2eis5WqQGV7peooDyLmNEPUrps9+SXX5c9pL3xEB+4e9HnGuDa7mB7kHxHw4CbqS9k1T2hOH3miL8n8WtiYVtg==
+  /is-docker/2.1.1:
+    dev: false
+    engines:
+      node: '>=8'
+    hasBin: true
+    resolution:
+      integrity: sha512-ZOoqiXfEwtGknTiuDEy8pN2CfE3TxMHprvNer1mXiqwkOT77Rw3YVrUQ52EqAOU3QAWDQ+bQdx7HJzrv7LS2Hw==
   /is-extendable/0.1.1:
     dev: true
     engines:
@@ -4123,6 +4150,14 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
+  /is-wsl/2.2.0:
+    dependencies:
+      is-docker: 2.1.1
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==
   /isarray/1.0.0:
     dev: true
     resolution:
@@ -4878,6 +4913,15 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
+  /open/7.3.0:
+    dependencies:
+      is-docker: 2.1.1
+      is-wsl: 2.2.0
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-mgLwQIx2F/ye9SmbrUkurZCnkoXyXyu9EbHtJZrICjVAJfyMArdHp3KkixGdZx1ZHFPNIwl0DDM1dFFqXbTLZw==
   /opn/5.5.0:
     dependencies:
       is-wsl: 1.1.0
@@ -6745,12 +6789,15 @@ specifiers:
   '@vaadin/vaadin-time-picker': 2.3.0
   '@vaadin/vaadin-upload': 4.4.0
   awesome-typescript-loader: 5.2.1
+  cdigit: 2.5.6
+  chance: 1.1.7
   chokidar: ^3.4.0
   compression-webpack-plugin: 4.0.1
   copy-webpack-plugin: 5.1.2
   html-webpack-plugin: 3.2.0
   lit-element: 2.3.1
   lit-html: 1.2.1
+  open: ^7.2.1
   progress-webpack-plugin: 0.0.24
   raw-loader: 4.0.0
   script-ext-html-webpack-plugin: 2.1.4
